@@ -1,7 +1,34 @@
 :root {
-  /* 既存のカラーバリアントはそのまま */
   --bg-level-0: #ffffff;
-  /* 省略… */
+  --bg-level-1: #f3f4f6;
+  --bg-level-2: #e5e7eb;
+  --bg-level-3: #d1d5db;
+  --bg-level-4: #9ca3af;
+  --bg-level-5: #6b7280;
+  --bg-level-6: #4b5563;
+  --bg-level-7: #374151;
+  --bg-level-8: #1f2937;
+  --bg-level-9: #111827;
+  --bg-level-10: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.5),
+    rgba(255, 165, 0, 0.5),
+    rgba(255, 255, 0, 0.5),
+    rgba(0, 128, 0, 0.5),
+    rgba(0, 0, 255, 0.5),
+    rgba(75, 0, 130, 0.5),
+    rgba(238, 130, 238, 0.5)
+  );
+  --bg-level-11: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.7),
+    rgba(255, 165, 0, 0.7),
+    rgba(255, 255, 0, 0.7),
+    rgba(0, 128, 0, 0.7),
+    rgba(0, 0, 255, 0.7),
+    rgba(75, 0, 130, 0.7),
+    rgba(238, 130, 238, 0.7)
+  );
   --bg-level-12: linear-gradient(
     90deg,
     red,
@@ -37,7 +64,7 @@ header {
 }
 #progress-bar {
   background: #eee;
-  border: 2px solid #3b82f6;  /* 枠線追加 */
+  border: 2px solid #3b82f6; /* 枠線追加 */
   border-radius: 4px;
   height: 8px;
   margin-bottom: 0.15rem;
