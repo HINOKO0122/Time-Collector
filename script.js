@@ -2,7 +2,7 @@
 const LEVELS = [1,2,4,8,16,32,64,128,256,512,1024,1440];
 const STORAGE_KEY = "time_collector_data";
 
-// データ読み込み
+// ローカルストレージから読み込み
 let collected = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
 // DOM要素
@@ -12,9 +12,10 @@ const select      = document.getElementById("hour-select");
 const nextTimeEl  = document.getElementById("next-time");
 const progressEl  = document.getElementById("progress-fill");
 const levelNumEl  = document.getElementById("level-num");
+const countEl     = document.getElementById("count-display");
 let chart;
 
-// 現在時刻表示＋収集ボタン更新
+// 現在時刻表示＋ボタン有効/無効切り替え
 function updateTime() {
   const now = new Date();
   const hh = String(now.getHours()).padStart(2, "0");
@@ -24,7 +25,7 @@ function updateTime() {
   btn.disabled = collected.includes(key);
 }
 
-// 収集ボタンクリック
+// 収集ボタン処理
 btn.addEventListener("click", () => {
   const t = timeEl.textContent;
   if (!collected.includes(t)) {
@@ -32,11 +33,11 @@ btn.addEventListener("click", () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(collected));
     btn.disabled = true;
     updateProgress();
-    drawChart(); // ボタン押下後に円グラフも更新
+    drawChart();
   }
 });
 
-// 時間帯セレクト初期化
+// ドロップダウン初期化
 function initSelect() {
   for (let h = 0; h < 24; h++) {
     const opt = document.createElement("option");
@@ -80,7 +81,7 @@ function findNextUncollected(hour) {
   return "--:--";
 }
 
-// レベル算出＋プログレスバー＆背景＆テキスト更新
+// レベル算出＋進捗バー・背景色・テキスト・総数表示更新
 function updateProgress() {
   const n             = collected.length;
   const nextThreshold = LEVELS.find(l => l > n) || 1440;
@@ -90,6 +91,8 @@ function updateProgress() {
 
   const lvl = LEVELS.filter(l => l <= n).length;
   levelNumEl.textContent = lvl;
+  countEl.textContent    = `${n}/1440`;
+
   document.body.style.backgroundColor =
     getComputedStyle(document.documentElement)
       .getPropertyValue(`--bg-level-${lvl}`);
@@ -98,13 +101,17 @@ function updateProgress() {
 // 初期化＋PWA Service Worker登録
 function init() {
   initSelect();
-  // 読み込み時点でのグラフとプログレス更新
+
+  // 時間帯セレクトを現在時刻の時にセット
   select.value = new Date().getHours();
-  drawChart();
+
+  // 初期更新
   updateTime();
   updateProgress();
+  drawChart();
 
   setInterval(updateTime, 1000);
+  select.addEventListener("change", drawChart);
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
@@ -112,8 +119,6 @@ function init() {
       .then(reg => console.log("SW registered:", reg.scope))
       .catch(err => console.error("SW registration failed:", err));
   }
-
-  select.addEventListener("change", drawChart);
 }
 
 window.onload = init;
