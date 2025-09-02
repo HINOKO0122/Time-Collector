@@ -9,7 +9,7 @@ let collected = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 const timeEl     = document.getElementById("current-time");
 const btn        = document.getElementById("collect-btn");
 const select     = document.getElementById("hour-select");
-const nextTimeEl = document.getElementById("next-time");
+const nextTimesEl = document.getElementById("next-times"); // 変更点：新しいIDに
 const chartEl    = document.getElementById("hour-chart");
 const progressEl = document.getElementById("progress-fill");
 const levelNumEl = document.getElementById("level-num");
@@ -53,7 +53,8 @@ function drawChart() {
   const hour  = Number(select.value);
   const total = 60;
   const count = collected.filter(t => Number(t.slice(0,2)) === hour).length;
-  nextTimeEl.textContent = findNextUncollected(hour);
+  // 変更点：次の未収集時間を表示する関数を呼び出し
+  displayNextUncollectedTimes();
 
   const cfg = {
     type: "pie",
@@ -71,8 +72,9 @@ function drawChart() {
   chart = new Chart(chartEl, cfg);
 }
 
-// 次の未収集時間を探す
-function findNextUncollected(hour) {
+// 次の未収集時間を探す（複数）
+function findNextUncollectedTimes(num) {
+  const times = [];
   const now   = new Date();
   const start = now.getHours()*60 + now.getMinutes();
   for (let off = 0; off < 1440; off++) {
@@ -80,9 +82,27 @@ function findNextUncollected(hour) {
     const hh  = String(Math.floor(idx/60)).padStart(2,"0");
     const mm  = String(idx%60).padStart(2,"0");
     const key = `${hh}:${mm}`;
-    if (!collected.includes(key)) return key;
+    if (!collected.includes(key)) {
+      times.push(key);
+      if (times.length >= num) return times;
+    }
   }
-  return "--:--";
+  return times; // 全て収集済みなら空の配列を返す
+}
+
+// 次の未収集時間を表示
+function displayNextUncollectedTimes() {
+  const nextTimes = findNextUncollectedTimes(5);
+  nextTimesEl.innerHTML = ''; // 既存のリストをクリア
+  if (nextTimes.length === 0) {
+    nextTimesEl.innerHTML = '<li>--:--</li>';
+    return;
+  }
+  nextTimes.forEach(time => {
+    const li = document.createElement("li");
+    li.textContent = time;
+    nextTimesEl.appendChild(li);
+  });
 }
 
 // レベル・プログレス・背景・総数表示更新
@@ -118,6 +138,8 @@ function init() {
   drawChart();
   setInterval(updateTime, 1000);
   select.addEventListener("change", drawChart);
+  // 変更点：1秒ごとに未収集時間リストも更新
+  setInterval(displayNextUncollectedTimes, 1000);
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
