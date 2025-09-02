@@ -10,8 +10,14 @@
 </head>
 <body>
   <header>
-    <div id="level-display">レベル: <span id="level-num">0</span></div>
-    <div id="progress-bar"><span id="progress-fill"></span></div>
+    <div id="level-display">
+      レベル: <span id="level-num">0</span>
+    </div>
+    <div id="progress-bar">
+      <span id="progress-fill"></span>
+    </div>
+    <!-- 追加：収集数表示 -->
+    <div id="count-display">0/1440</div>
   </header>
 
   <main>
@@ -26,11 +32,9 @@
     <p>次の未収集：<span id="next-time">--:--</span></p>
   </section>
 
-  <!-- PWA用スクリプト -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 
-  <!-- 追加：岩校数研TOPへ戻るボタン -->
   <footer>
     <a
       class="top-btn"
