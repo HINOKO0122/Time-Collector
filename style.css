@@ -1,0 +1,88 @@
+:root {
+  --bg-level-0: #ffffff;
+  --bg-level-1: #f0f8ff;
+  --bg-level-2: #e6fffa;
+  --bg-level-3: #e0f2fe;
+  --bg-level-4: #ede9fe;
+  --bg-level-5: #fff1f2;
+  --bg-level-6: #f5f3ff;
+  --bg-level-7: #fffbeb;
+  --bg-level-8: #f8fafc;
+  --bg-level-9: #fdf2f8;
+  --bg-level-10: #f0fdf4;
+  --bg-level-11: #fefce8;
+  --bg-level-12: #fef2f2;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: sans-serif;
+  background-color: var(--bg-level-0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+}
+
+#progress-bar {
+  background: #eee;
+  height: 8px;
+  position: relative;
+}
+
+#progress-fill {
+  display: block;
+  height: 100%;
+  background: #3b82f6;
+  width: 0%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-display {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.stats {
+  margin: 2rem 0;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .time-display {
+    font-size: 4.5rem;
+  }
+  button {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
+}
