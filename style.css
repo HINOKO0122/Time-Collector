@@ -51,7 +51,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  position: relative; /* 変更点: absoluteで要素を配置するために必要 */
+  position: relative;
 }
 
 header {
@@ -76,7 +76,6 @@ header {
   background: #3b82f6;
   width: 0%;
 }
-/* 変更点: 次のレベルまでの表示スタイル */
 #next-level-info {
   font-size: 0.9rem;
   text-align: center;
@@ -122,13 +121,14 @@ button:disabled {
   height: 140px !important;
   margin-bottom: 0.25rem;
 }
-/* 変更点: xx/1440 の表示位置を右下に固定 */
+/* 変更点: xx/1440 の表示を中央寄せに戻す */
 #count-display {
-  position: absolute;
-  bottom: 0.75rem;
-  right: 0.75rem;
   font-size: 0.9rem;
   color: #888;
+  margin-top: 1rem; /* 周囲の要素との余白を調整 */
+  margin-bottom: 1rem;
+  text-align: center;
+  position: static; /* absolute を解除 */
 }
 
 footer {
