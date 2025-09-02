@@ -51,11 +51,12 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  position: relative; /* 変更点: absoluteで要素を配置するために必要 */
 }
 
 header {
   width: 100%;
-  margin-bottom: 0.25rem; /* 変更点：余白を狭く */
+  margin-bottom: 0.25rem;
 }
 #level-display {
   font-size: 1.1rem;
@@ -75,11 +76,13 @@ header {
   background: #3b82f6;
   width: 0%;
 }
-
-#count-display {
+/* 変更点: 次のレベルまでの表示スタイル */
+#next-level-info {
   font-size: 0.9rem;
   text-align: center;
-  margin-bottom: 0;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  color: #555;
 }
 
 main {
@@ -87,7 +90,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.25rem; /* 変更点：余白を狭く */
+  margin-bottom: 0.25rem;
 }
 .time-display {
   font-size: 3rem;
@@ -110,14 +113,22 @@ button:disabled {
   text-align: center;
 }
 .stats h3 {
-  margin-top: 0.5rem; /* 変更点：h3の上余白を調整 */
+  margin-top: 0.5rem;
   margin-bottom: 0.2rem;
 }
 
 #hour-chart {
   width: 140px !important;
   height: 140px !important;
-  margin-bottom: 0.25rem; /* 変更点：円グラフの下余白を調整 */
+  margin-bottom: 0.25rem;
+}
+/* 変更点: xx/1440 の表示位置を右下に固定 */
+#count-display {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.9rem;
+  color: #888;
 }
 
 footer {
