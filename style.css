@@ -1,22 +1,22 @@
 :root {
+  /* 既存のカラーバリアントはそのまま */
   --bg-level-0: #ffffff;
-  --bg-level-1: #f0f8ff;
-  --bg-level-2: #e6fffa;
-  --bg-level-3: #e0f2fe;
-  --bg-level-4: #ede9fe;
-  --bg-level-5: #fff1f2;
-  --bg-level-6: #f5f3ff;
-  --bg-level-7: #fffbeb;
-  --bg-level-8: #f8fafc;
-  --bg-level-9: #fdf2f8;
-  --bg-level-10: #f0fdf4;
-  --bg-level-11: #fefce8;
-  --bg-level-12: #fef2f2;
+  /* 省略… */
+  --bg-level-12: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
 }
 
 body {
   margin: 0;
-  padding: 1rem;
+  padding: 0.75rem;
   font-family: sans-serif;
   background-color: var(--bg-level-0);
   display: flex;
@@ -25,37 +25,22 @@ body {
   min-height: 100vh;
 }
 
-/* 間隔調整 */
+/* header〜main〜stats の間隔をギュッと詰める */
 header {
   width: 100%;
-  margin-bottom: 0.5rem;
-}
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-}
-.stats {
-  margin: 1rem 0;
-  padding: 0 1rem;
-  text-align: center;
-}
-
-/* レベル表示 */
-#level-display {
-  font-size: 1.25rem;
-  text-align: center;
   margin-bottom: 0.25rem;
 }
-
-/* プログレスバー */
+#level-display {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 0.15rem;
+}
 #progress-bar {
   background: #eee;
+  border: 2px solid #3b82f6;  /* 枠線追加 */
+  border-radius: 4px;
   height: 8px;
-  position: relative;
+  margin-bottom: 0.15rem;
 }
 #progress-fill {
   display: block;
@@ -66,41 +51,58 @@ main {
 
 /* 収集数表示 */
 #count-display {
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: center;
-  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
-/* 時刻表示 */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
 .time-display {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
-
-/* ボタン */
 button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-  border-radius: 0.5rem;
-  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 0.4rem;
+  margin: 0.25rem 0;
 }
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* フッターのトップボタン */
+.stats {
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+/* 円グラフを小さめに固定 */
+#hour-chart {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+/* フッターボタン */
 footer {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   text-align: center;
 }
 .top-btn {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
   background-color: #3b82f6;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
   transition: background-color 0.2s;
 }
@@ -108,17 +110,9 @@ footer {
   background-color: #2563eb;
 }
 
-/* レスポンシブ */
-@media screen and (min-width: 600px) {
-  body {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .time-display {
-    font-size: 4.5rem;
-  }
-  button {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-  }
+/* スマホでの縦スクロールを最小化 */
+@media screen and (max-height: 700px) {
+  .time-display { font-size: 2.5rem; }
+  button { font-size: 1rem; padding: 0.4rem 0.8rem; }
+  #hour-chart { width: 120px !important; height: 120px !important; }
 }
