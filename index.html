@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Time Collector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div id="progress-bar"><span id="progress-fill"></span></div>
+  </header>
+
+  <main>
+    <div class="time-display" id="current-time">00:00</div>
+    <button id="collect-btn">Collect</button>
+  </main>
+
+  <section class="stats">
+    <label for="hour-select">時刻帯を選択：</label>
+    <select id="hour-select"></select>
+    <canvas id="hour-chart" width="200" height="200"></canvas>
+    <p>次の未収集：<span id="next-time">--:--</span></p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
