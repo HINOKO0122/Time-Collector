@@ -9,11 +9,13 @@ let collected = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 const timeEl     = document.getElementById("current-time");
 const btn        = document.getElementById("collect-btn");
 const select     = document.getElementById("hour-select");
-const nextTimesEl = document.getElementById("next-times"); // 変更点：新しいIDに
+const nextTimesEl = document.getElementById("next-times");
 const chartEl    = document.getElementById("hour-chart");
 const progressEl = document.getElementById("progress-fill");
 const levelNumEl = document.getElementById("level-num");
 const countEl    = document.getElementById("count-display");
+// 変更点: 次のレベルまでの表示要素
+const remainingCountEl = document.getElementById("remaining-count");
 let chart;
 
 // 現在時刻＆ボタン状態更新
@@ -53,13 +55,13 @@ function drawChart() {
   const hour  = Number(select.value);
   const total = 60;
   const count = collected.filter(t => Number(t.slice(0,2)) === hour).length;
-  // 変更点：次の未収集時間を表示する関数を呼び出し
   displayNextUncollectedTimes();
 
   const cfg = {
     type: "pie",
     data: {
-      labels: ["集めた", "未収集"],
+      // 変更点: ラベル名を変更
+      labels: ["収集済み", "未収集"],
       datasets: [{
         data: [count, total - count],
         backgroundColor: ["#10b981","#f87171"]
@@ -93,7 +95,7 @@ function findNextUncollectedTimes(num) {
 // 次の未収集時間を表示
 function displayNextUncollectedTimes() {
   const nextTimes = findNextUncollectedTimes(5);
-  nextTimesEl.innerHTML = ''; // 既存のリストをクリア
+  nextTimesEl.innerHTML = '';
   if (nextTimes.length === 0) {
     nextTimesEl.innerHTML = '<li>--:--</li>';
     return;
@@ -115,7 +117,11 @@ function updateProgress() {
 
   const lvl = LEVELS.filter(l => l <= n).length;
   levelNumEl.textContent = lvl;
+  // 変更点: カウント表示は右下に移動
   countEl.textContent    = `${n}/1440`;
+  // 変更点: 次のレベルまでの残り時間を表示
+  const remaining = nextTh - n;
+  remainingCountEl.textContent = (remaining > 0) ? remaining : 0;
   // グラデ背景 or 単色背景
   if (lvl === 12) {
     document.body.style.backgroundImage =
@@ -138,7 +144,6 @@ function init() {
   drawChart();
   setInterval(updateTime, 1000);
   select.addEventListener("change", drawChart);
-  // 変更点：1秒ごとに未収集時間リストも更新
   setInterval(displayNextUncollectedTimes, 1000);
 
   if ("serviceWorker" in navigator) {
