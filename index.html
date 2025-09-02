@@ -16,7 +16,7 @@
     <div id="progress-bar">
       <span id="progress-fill"></span>
     </div>
-    <div id="count-display">0/1440</div>
+    <div id="next-level-info">次のレベルまであと: <span id="remaining-count">0</span></div>
   </header>
 
   <main>
@@ -28,9 +28,11 @@
     <label for="hour-select">時刻帯を選択：</label>
     <select id="hour-select"></select>
     <canvas id="hour-chart"></canvas>
-    <h3>次の未収集</h3>
+    <h3>次の未収集時刻</h3>
     <ul id="next-times"></ul>
   </section>
+
+  <div id="count-display">0/1440</div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
