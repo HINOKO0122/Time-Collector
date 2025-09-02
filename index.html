@@ -16,7 +16,7 @@
     <div id="progress-bar">
       <span id="progress-fill"></span>
     </div>
-    <!-- 追加：収集数表示 -->
+    <!-- ここで XX/1440 を表示 -->
     <div id="count-display">0/1440</div>
   </header>
 
@@ -28,7 +28,7 @@
   <section class="stats">
     <label for="hour-select">時刻帯を選択：</label>
     <select id="hour-select"></select>
-    <canvas id="hour-chart" width="200" height="200"></canvas>
+    <canvas id="hour-chart"></canvas>
     <p>次の未収集：<span id="next-time">--:--</span></p>
   </section>
 
@@ -36,9 +36,7 @@
   <script src="script.js"></script>
 
   <footer>
-    <a
-      class="top-btn"
-      href="https://wiki3.jp/iwakuni-mathclub"
+    <a class="top-btn" href="https://wiki3.jp/iwakuni-mathclub"
       >岩校数研TOPへ戻る</a
     >
   </footer>
