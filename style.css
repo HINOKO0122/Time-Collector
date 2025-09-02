@@ -92,3 +92,23 @@ button:disabled {
     font-size: 1.5rem;
   }
 }
+
+footer {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.top-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background-color: #3b82f6;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.top-btn:hover {
+  background-color: #2563eb;
+}
