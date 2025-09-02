@@ -1,33 +1,34 @@
 :root {
-  --bg-level-0: #ffffff;
-  --bg-level-1: #f3f4f6;
-  --bg-level-2: #e5e7eb;
-  --bg-level-3: #d1d5db;
-  --bg-level-4: #9ca3af;
-  --bg-level-5: #6b7280;
-  --bg-level-6: #4b5563;
-  --bg-level-7: #374151;
-  --bg-level-8: #1f2937;
-  --bg-level-9: #111827;
+  /* 👇 明るく、レベルに応じて彩度が上がる配色に変更 */
+  --bg-level-0: #f8f8f8; /* 非常に明るいグレー */
+  --bg-level-1: #e6f7ff; /* パステルブルー */
+  --bg-level-2: #e0fff2; /* パステルグリーン */
+  --bg-level-3: #fff3e0; /* パステルオレンジ */
+  --bg-level-4: #f7e6ff; /* パステルパープル */
+  --bg-level-5: #ffebf0; /* パステルピンク */
+  --bg-level-6: #d1e2ff; /* 明るい青 */
+  --bg-level-7: #b3ffda; /* 明るい緑 */
+  --bg-level-8: #ffd9a3; /* 明るいオレンジ */
+  --bg-level-9: #c2b3ff; /* 明るい紫 */
   --bg-level-10: linear-gradient(
     90deg,
-    rgba(255, 0, 0, 0.5),
-    rgba(255, 165, 0, 0.5),
-    rgba(255, 255, 0, 0.5),
-    rgba(0, 128, 0, 0.5),
-    rgba(0, 0, 255, 0.5),
-    rgba(75, 0, 130, 0.5),
-    rgba(238, 130, 238, 0.5)
+    #ff6b6b,
+    #ffa500,
+    #ffe500,
+    #6bff6b,
+    #6b94ff,
+    #a26bff,
+    #ff6bb2
   );
   --bg-level-11: linear-gradient(
     90deg,
-    rgba(255, 0, 0, 0.7),
-    rgba(255, 165, 0, 0.7),
-    rgba(255, 255, 0, 0.7),
-    rgba(0, 128, 0, 0.7),
-    rgba(0, 0, 255, 0.7),
-    rgba(75, 0, 130, 0.7),
-    rgba(238, 130, 238, 0.7)
+    #ff4a4a,
+    #ff8c00,
+    #ffd700,
+    #4aff4a,
+    #4a7aff,
+    #8f4aff,
+    #ff4a99
   );
   --bg-level-12: linear-gradient(
     90deg,
@@ -52,10 +53,9 @@ body {
   min-height: 100vh;
 }
 
-/* header〜main〜stats の間隔をギュッと詰める */
 header {
   width: 100%;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem; /* 変更点：余白を狭く */
 }
 #level-display {
   font-size: 1.1rem;
@@ -64,7 +64,7 @@ header {
 }
 #progress-bar {
   background: #eee;
-  border: 2px solid #3b82f6; /* 枠線追加 */
+  border: 2px solid #3b82f6;
   border-radius: 4px;
   height: 8px;
   margin-bottom: 0.15rem;
@@ -76,22 +76,18 @@ header {
   width: 0%;
 }
 
-/* 収集数表示 */
 #count-display {
   font-size: 0.9rem;
   text-align: center;
-  /* 👇ここの間隔を狭めました */
-  margin-bottom: 0.2rem;
+  margin-bottom: 0;
 }
 
 main {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* 👇ここの間隔を狭めました */
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.25rem; /* 変更点：余白を狭く */
 }
 .time-display {
   font-size: 3rem;
@@ -109,19 +105,21 @@ button:disabled {
 }
 
 .stats {
-  /* 👇ここの間隔を狭めました */
-  margin: 0.2rem 0;
+  margin: 0;
   padding: 0 0.5rem;
   text-align: center;
 }
+.stats h3 {
+  margin-top: 0.5rem; /* 変更点：h3の上余白を調整 */
+  margin-bottom: 0.2rem;
+}
 
-/* 円グラフを小さめに固定 */
 #hour-chart {
   width: 140px !important;
   height: 140px !important;
+  margin-bottom: 0.25rem; /* 変更点：円グラフの下余白を調整 */
 }
 
-/* フッターボタン */
 footer {
   margin: 1.5rem 0;
   text-align: center;
@@ -140,9 +138,16 @@ footer {
   background-color: #2563eb;
 }
 
-/* スマホでの縦スクロールを最小化 */
 @media screen and (max-height: 700px) {
-  .time-display { font-size: 2.5rem; }
-  button { font-size: 1rem; padding: 0.4rem 0.8rem; }
-  #hour-chart { width: 120px !important; height: 120px !important; }
+  .time-display {
+    font-size: 2.5rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+  #hour-chart {
+    width: 120px !important;
+    height: 120px !important;
+  }
 }
